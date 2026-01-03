@@ -1,0 +1,29 @@
+# Next Target
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// plan fitur kedepannya //
+
+### BOT WHATSAPP
+
+* **Fitur OTP Password**
+* **Penambahan akun otomatis** dari topik MQTT yang sama
+
+log actifity
+-get user login, change pass, change photo, get user os, browser, ip dll 
+-admin log
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+## // coding //
+
+* Perbaikan isi PDF
+* Tambahkan field **jam masuk**
+* Tambahkan **total terlambat**
+* Tambahkan **total tepat waktu**
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+## // dokumen //
+
+* Perbaiki ERD

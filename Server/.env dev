@@ -1,0 +1,27 @@
+#MODE || true / false
+PRODUCTION_MODE=false
+
+#COCKIE DOMAIN FOR PRODUCTION MODE ex (.alif.my.id)
+COOKIE_DOMAIN=
+
+#CORS CONFIG ex (http://asd.com,http://asdww.com) use "," to separate
+CLIENT_URLS=
+
+JWT_SECRET=
+#DATABASE_URL="mysql://root:rootpassword@db:3306/smartpresence"
+
+DATABASE_URL="mysql://user:userpassword@node_db:3306/smartpresence"
+PORT=3000
+
+
+#WHATSAPP
+API_WHATSAPP_KEY=
+
+#MQTT
+MQTT_BROKER_URL=
+MQTT_USERNAME=
+MQTT_PASSWORD=
+
+#MQTT TOPIC FOR TAP
+MQTT_PUBLISH=
+MQTT_TOPIC=

@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  siswa
+  guru
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  name          String
+  nisn          String?
+  nip           String?
+  role          Role
+  password      String
+  nohp          String
+  rfid          Rfid?
+  password_otp  Password_otp[]
+  kelas         Kelas[]
+  log_aktifitas Log_aktifitas[]
+  createdAt     DateTime        @default(now())
+  Absensi       Absensi[]
+  notif_aktif   Boolean         @default(true)
+  photo         String?         @default("default")
+
+  @@index([nohp])
+  @@map("users")
+}
+
+model Rfid {
+  user      User     @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userid    Int      @unique
+  rfid      String   @unique
+  createdAt DateTime @default(now())
+
+  @@index([userid])
+  @@map("rfid")
+}
+
+model Absensi {
+  id      Int       @id @default(autoincrement())
+  kelas   Kelas     @relation(fields: [kelasid], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  kelasid Int
+  userid  Int
+  user    User      @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  status  Boolean   @default(true)
+  keluar  DateTime?
+  masuk   DateTime  @default(now())
+
+  @@index([kelasid, userid, masuk])
+  @@map("absensi")
+}
+
+model Kelas {
+  id        Int       @id @default(autoincrement())
+  guru      User      @relation(fields: [guruid], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  guruid    Int
+  nama      String?
+  absensi   Absensi[]
+  expiredAt DateTime
+  status    Boolean   @default(true)
+  keluar    DateTime?
+  masuk     DateTime  @default(now())
+
+  @@index([guruid])
+  @@map("kelas")
+}
+
+model Password_otp {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userid    Int
+  expiredAt DateTime
+  otp       String
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([userid, id])
+  @@map("password_otp")
+}
+
+model Log_aktifitas {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userid    Int
+  os        String
+  browser   String
+  ip        String
+  platform  String
+  isMobile  Boolean
+  aktivitas String
+  createdAt DateTime @default(now())
+
+  @@index([userid])
+  @@map("log_aktifitas")
+}

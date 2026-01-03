@@ -1,0 +1,5 @@
+/node_modules/
+.env
+/src/generated/prisma/
+test2.js
+/storage/pdf/
