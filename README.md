@@ -2,7 +2,7 @@
 
 **RFID-Based Smart Student Access System with Web Monitoring and Daily Activity Tracking**
 
-![Preview Aplikasi](poster.png)
+![Preview Aplikasi](Poster.png)
 
 ---
 
